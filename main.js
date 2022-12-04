@@ -1,3 +1,7 @@
+difference=0
+leftWristX=0
+rightWristX=0
+
 function setup(){
     video=createCapture(VIDEO);
     video.size(550,500);
@@ -10,6 +14,10 @@ function setup(){
 
 function draw(){
     background('#196b49');
+    document.getElementById("font_size").innerHTML="size of the text will be = "+difference+"px"
+    textSize(difference);
+    fill("#fafbfc");
+    text("net",60,300);
 }
 
 function modelLoaded(){
@@ -21,5 +29,9 @@ function gotPoses(results){
         results.length>0    
     ){
         console.log(results);
+        leftWristX=results[0].pose.leftWrist.x;
+        righWristX=results[0].pose.rightWrist.x;
+        difference=floor(leftWristX-rightWristX);
+
     }
 }
